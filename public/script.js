@@ -24,10 +24,10 @@ document.addEventListener('DOMContentLoaded', function() {
     }
 
     // Copy to clipboard function
-    function copyToClipboard(text) {
+    function copyToClipboard(text, buttonElement) {
         navigator.clipboard.writeText(text).then(() => {
             // Show success feedback
-            const copyBtn = event.target;
+            const copyBtn = buttonElement;
             const originalText = copyBtn.textContent;
             copyBtn.textContent = 'COPIED!';
             copyBtn.style.background = 'var(--accent-success)';
@@ -38,6 +38,8 @@ document.addEventListener('DOMContentLoaded', function() {
                 copyBtn.style.background = 'var(--accent-purple)';
                 copyBtn.style.borderColor = 'var(--accent-purple)';
             }, 2000);
+        }).catch((err) => {
+            alert('Failed to copy to clipboard');
         });
     }
 
@@ -74,11 +76,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         <div>Please enter a valid HTTP/HTTPS URL</div>
                     </div>
                 `;
-                
-                const outputStatus = output.querySelector('.output-status');
-                outputStatus.textContent = 'ERROR';
-                outputStatus.style.color = 'var(--accent-error)';
-                outputStatus.style.borderColor = 'var(--accent-error)';
             } else {
                 const shortUrl = `${window.location.origin}/api/shorturl/${data.short_url}`;
                 
@@ -92,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <strong>SHORTENED:</strong><br>
                             ${shortUrl}
                         </div>
-                        <button class="copy-btn" onclick="copyToClipboard('${shortUrl}')">
+                        <button class="copy-btn" onclick="copyToClipboard('${shortUrl}', this)">
                             COPY_URL
                         </button>
                     </div>
@@ -100,11 +97,6 @@ document.addEventListener('DOMContentLoaded', function() {
                         ✅ URL successfully shortened!
                     </div>
                 `;
-                
-                const outputStatus = output.querySelector('.output-status');
-                outputStatus.textContent = 'SUCCESS';
-                outputStatus.style.color = 'var(--accent-success)';
-                outputStatus.style.borderColor = 'var(--accent-success)';
                 
                 // Update stats
                 updateStats();

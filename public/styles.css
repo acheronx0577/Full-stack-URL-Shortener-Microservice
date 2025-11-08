@@ -15,6 +15,10 @@
   --accent-cyan: #03dac6;
   --shadow-glow: 0 0 30px rgba(51, 153, 255, 0.3);
   --shadow-glow-success: 0 0 20px rgba(0, 255, 136, 0.3);
+  --gradient-dark: #1a1a2e;
+  --gradient-accent: #16213e;
+  --gradient-secondary: #2d5a8c;
+  --gradient-tertiary: #1e4976;
 }
 
 * {

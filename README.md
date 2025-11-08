@@ -48,10 +48,10 @@ This repository contains one of the portfolio projects needed to demonstrate bac
 
 1. Clone the repository:
    ```
-   git clone git@github.com:acheronx0577/Full-Stack-Timestamp-Microservice-FreeCodeCamp.git
+   git clone git@github.com:acheronx0577/Full-stack-URL-Shortener-Microservice.git
    ```
    ```
-   cd Full-Stack-Timestamp-Microservice-FreeCodeCamp
+   cd Full-stack-URL-Shortener-Microservice
    ```
 3. Install dependencies:
    ```

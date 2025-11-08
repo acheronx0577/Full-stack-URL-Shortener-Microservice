@@ -1,32 +1,102 @@
 <!DOCTYPE html>
-
-<html>
+<html lang="en">
   <head>
-    <title>URL Shortener Microservice | freeCodeCamp.org</title>
-    <link
-      rel="icon"
-      type="image/png"
-      href="https://cdn.freecodecamp.org/universal/favicons/favicon-16x16.png"
-    />
-    <link href="/public/style.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <link rel="stylesheet" href="/public/styles.css" />
+    <link href="https://fonts.googleapis.com/css2?family=Geist+Mono:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <title>URL_SHORTENER</title>
   </head>
-
   <body>
-    <h1>URL Shortener Microservice</h1>
-    <main>
-      <section>
-        <form action="api/shorturl" method="POST">
-          <fieldset>
-            <legend>URL Shortener</legend>
-            <label for="url_input">URL:</label>
-            <input id="url_input" type="text" name="url" placeholder="https://www.freecodecamp.org/" />
-            <input type="submit" value="POST URL" />
-          </fieldset>
-        </form>
-      </section>
-    </main>
-    <footer>
-      <p>By <a href="https://www.freecodecamp.org/">freeCodeCamp</a></p>
-    </footer>
+    <div class="terminal">
+      <header class="terminal-header">
+        <div class="window-controls">
+          <span class="control close"></span>
+          <span class="control minimize"></span>
+          <span class="control maximize"></span>
+        </div>
+        <div class="title-bar">
+          <span class="prompt">></span>
+          <span class="title">URL_SHORTENER_MICROSERVICE</span>
+          <span class="cursor">_</span>
+        </div>
+      </header>
+
+      <main class="terminal-body">
+        <div class="app-header">
+          <h1 class="app-title">~/services/url_shortener</h1>
+          <div class="status-bar">
+            <span class="status-item">ONLINE</span>
+            <span class="status-item">v2.0.0</span>
+            <span class="status-item">REST_API</span>
+          </div>
+        </div>
+
+        <div class="input-section">
+          <div class="input-group">
+            <label for="urlInput" class="input-label">
+              <span class="label-text">URL_TO_SHORTEN</span>
+              <span class="label-desc">[must include http:// or https://]</span>
+            </label>
+            <input
+              type="url"
+              id="urlInput"
+              class="terminal-input"
+              placeholder="https://example.com/very/long/url/path"
+              value=""
+            />
+          </div>
+
+          <button id="shorten" class="terminal-btn">
+            <span class="btn-text">SHORTEN_URL</span>
+          </button>
+        </div>
+
+        <div id="output" class="output-panel hide">
+          <div class="output-header">
+            <span class="output-title">SHORTENED_URL</span>
+            <span class="output-status">READY</span>
+          </div>
+          <div class="output-content">
+            <div id="result" class="result-content"></div>
+          </div>
+        </div>
+
+        <div class="info-panel">
+          <div class="info-header">
+            <span class="info-title">SERVICE_STATISTICS</span>
+          </div>
+          <div class="info-content">
+            <div class="stats-grid">
+              <div class="stat-item">
+                <span class="stat-value" id="total-urls">0</span>
+                <span class="stat-label">TOTAL_URLS</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value" id="active-urls">0</span>
+                <span class="stat-label">ACTIVE_URLS</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">100%</span>
+                <span class="stat-label">UPTIME</span>
+              </div>
+              <div class="stat-item">
+                <span class="stat-value">v2.0</span>
+                <span class="stat-label">VERSION</span>
+              </div>
+            </div>
+          </div>
+        </div>
+      </main>
+
+      <footer class="terminal-footer">
+        <div class="footer-stats">
+          <span class="stat">STATUS: <span class="highlight">OPERATIONAL</span></span>
+          <span class="stat">REQUESTS: <span class="highlight" id="total-urls-footer">0</span></span>
+          <span class="stat">API: <span class="highlight">RESTful</span></span>
+        </div>
+      </footer>
+    </div>
+    <script src="/public/script.js"></script>
   </body>
 </html>

@@ -89,7 +89,7 @@ document.addEventListener('DOMContentLoaded', function() {
                             <strong>SHORTENED:</strong><br>
                             ${shortUrl}
                         </div>
-                        <button class="copy-btn" onclick="copyToClipboard('${shortUrl}', this)">
+                        <button class="copy-btn" data-url="${shortUrl}">
                             COPY_URL
                         </button>
                     </div>
@@ -98,6 +98,11 @@ document.addEventListener('DOMContentLoaded', function() {
                     </div>
                 `;
                 
+                const copyBtn = resultDiv.querySelector('.copy-btn');
+                copyBtn.addEventListener('click', function() {
+                    copyToClipboard(this.dataset.url, this);
+                });
+
                 // Update stats
                 updateStats();
             }

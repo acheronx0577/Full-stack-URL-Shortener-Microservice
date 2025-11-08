@@ -25,6 +25,7 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  background: linear-gradient(135deg, var(--bg-primary) 0%, var(--gradient-dark) 50%, var(--gradient-accent) 100%);
 }
 
 body {

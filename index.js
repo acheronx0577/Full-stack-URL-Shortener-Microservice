@@ -30,6 +30,16 @@ app.get('/api/hello', function(req, res) {
 let urlDatabase = [];
 let shortUrlCounter = 1;
 
+// Helper function to generate short codes
+function generateShortCode() {
+  const chars = 'abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789';
+  let result = '';
+  for (let i = 0; i < 6; i++) {
+    result += chars.charAt(Math.floor(Math.random() * chars.length));
+  }
+  return result;
+}
+
 // Helper function to validate URL
 function isValidUrl(string) {
   try {
@@ -54,29 +64,30 @@ app.post('/api/shorturl', (req, res) => {
   if (existingUrl) {
     return res.json({
       original_url: existingUrl.original_url,
-      short_url: existingUrl.short_url
+      short_url: existingUrl.short_code
     });
   }
 
-  // Create new short URL
-  const shortUrl = shortUrlCounter++;
+  // Create new short URL with short code
+  const shortCode = generateShortCode();
   const newUrlEntry = {
     original_url: originalUrl,
-    short_url: shortUrl
+    short_code: shortCode,
+    short_url: shortCode  // For frontend compatibility
   };
   
   urlDatabase.push(newUrlEntry);
   
   res.json({
     original_url: originalUrl,
-    short_url: shortUrl
+    short_url: shortCode
   });
 });
 
-// GET endpoint to redirect to original URL
-app.get('/api/shorturl/:short_url', (req, res) => {
-  const shortUrl = parseInt(req.params.short_url);
-  const urlEntry = urlDatabase.find(entry => entry.short_url === shortUrl);
+// GET endpoint to redirect to original URL (using short codes)
+app.get('/api/shorturl/:short_code', (req, res) => {
+  const shortCode = req.params.short_code;
+  const urlEntry = urlDatabase.find(entry => entry.short_code === shortCode);
   
   if (urlEntry) {
     res.redirect(urlEntry.original_url);
@@ -85,7 +96,20 @@ app.get('/api/shorturl/:short_url', (req, res) => {
   }
 });
 
-// ADD THIS ENDPOINT - Stats endpoint for frontend
+// Root-level short URLs for even shorter links
+app.get('/:shortCode', (req, res) => {
+  const shortCode = req.params.shortCode;
+  const urlEntry = urlDatabase.find(entry => entry.short_code === shortCode);
+  
+  if (urlEntry) {
+    res.redirect(urlEntry.original_url);
+  } else {
+    // If it's not a short code, serve the main page
+    res.sendFile(path.join(__dirname, 'views', 'index.html'));
+  }
+});
+
+// Stats endpoint for frontend
 app.get('/api/stats', (req, res) => {
   res.json({
     total: urlDatabase.length,

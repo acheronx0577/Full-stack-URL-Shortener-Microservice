@@ -53,7 +53,7 @@ This repository contains one of the portfolio projects needed to demonstrate bac
    ```
    cd Full-stack-URL-Shortener-Microservice
    ```
-3. Install dependencies:
+2. Install dependencies:
    ```
    npm install
    ```
@@ -63,7 +63,7 @@ This repository contains one of the portfolio projects needed to demonstrate bac
    ```
    npm init -y
    ```
-4. Start in http://localhost:3000
+3. Start in http://localhost:3000
    ```
    npm start
    ```
